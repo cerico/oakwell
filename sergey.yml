@@ -1,0 +1,59 @@
+---
+- name: This is a hello-world example
+  hosts: localhost
+  connection: local 
+
+  vars_files:
+    - vars/sergey
+
+  tasks:
+    - name: Create root directory fo app.
+      file:
+        path: "{{ app }}"
+        state: directory
+
+    - name: Copy favicon ico.
+      copy:
+        src: sergey/favicon.ico
+        dest: "{{ app }}/favicon.ico"
+
+    - name: Create sergey src directory.
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - '{{ app }}/src'
+      
+    - name: Copy headers.
+      copy:
+        src: sergey/headers
+        dest: "{{ app }}/headers"
+
+    - name: Ansible copy sergey files.
+      copy:
+        src: sergey/files
+        dest: "{{ app }}"
+    
+    - name: Ansible copy sergey imports.
+      copy:
+        src: sergey/_imports
+        dest: "{{ app }}"
+
+    - name: Create package.json.
+      template:
+        src: sergey/package.json.j2
+        dest: "{{ app }}/package.json"
+
+    - name: Copy index.html.
+      copy:
+        src: sergey/index.html
+        dest: "{{ app }}/index.html"
+
+    - name: Install packages based on package.json.
+      npm:
+        path: "{{ app }}"
+
+    - name: Copy sergey html file.
+      template:
+        src: sergey/first.html.j2
+        dest: "{{ app }}/_imports/sections/first.html"

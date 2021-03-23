@@ -1,0 +1,4 @@
+sergey_name: '{{ db_user }}'
+app: '~/trees.field'
+url: 'uk.lol.de'
+location: '/var/www/html/yes.de'
