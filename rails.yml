@@ -1,0 +1,53 @@
+---
+- name: This is a hello-world example
+  hosts: localhost
+  connection: local 
+
+  vars_files:
+    - config/rails
+
+  tasks:
+    - name: check for rails app
+      stat: path={{ app_location }}
+      register: rails
+
+    - name: exit if rails app already exists with this name
+      fail: msg="This rails app already exists - edit rails/vars with new info"
+      when: rails.stat.exists
+
+    - name: rails new.
+      command: "rails new {{ app_location }} --database=postgresql --skip-coffee"
+    
+    - name: Copy ansible deploy stuff
+      copy:
+        src: "{{ item }}"
+        dest: "{{ app_location }}/.deploy"
+      with_items:
+      - rails/deploy_tasks
+      - rails/roles
+      - rails/templates
+      - rails/ansible.cfg
+      - rails/deploy.yml
+      - rails/provision.yml
+      - rails/hosts.ini
+
+    - name: vars
+      template:
+        src: rails/app-vars.yml.j2
+        dest: "{{ app_location }}/.deploy/app-vars.yml"
+
+    - name: Copy makefile
+      copy:
+        src: "{{ item }}"
+        dest: "{{ app_location }}"
+      with_items:
+      - rails/Makefile
+
+    - name: Ansible master key
+      shell: "echo master_key: $(cat {{ app_location }}/config/master.key) >> {{ app_location }}/.deploy/secrets"
+
+    - name: Ansible db_password
+      shell: "echo db_password: $(cat {{ app_location }}/config/master.key) >> {{ app_location }}/.deploy/secrets"
+
+    - name: Ansible gitignore
+      shell: "echo .deploy/secrets >> {{ app_location }}/.gitignore"

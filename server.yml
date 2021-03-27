@@ -1,9 +1,9 @@
 ---
-- hosts: cloud
+- hosts: webserver
   become: true
 
   vars_files:
-    - vars/server
+    - config/server
 
   pre_tasks:
     - name: Update apt cache if needed.
@@ -114,11 +114,12 @@
           - nodejs
           - yarn
           - zsh
+          - tree
 
 - name: Log in as deploy user and setup ruby, passenger and nginx
-  hosts: cloud
+  hosts: webserver
   vars_files:
-    - vars/server
+    - config/server
   user: "{{ deploy_user }}"
   become: true
   become_user: "{{ deploy_user }}"
@@ -153,12 +154,26 @@
     - name: source bashrc
       shell: . /home/{{ deploy_user }}/.bashrc
 
+    - name: check ruby {{ ruby_version }} is installed for system
+      shell: "/home/{{ deploy_user }}/.rbenv/bin/rbenv versions | grep {{ruby_version}}"
+      register: ruby_installed
+      changed_when: false
+      ignore_errors: yes
+      check_mode: no
+
     - name: rbenv install ruby
       command: "/home/{{ deploy_user }}/.rbenv/bin/rbenv install --verbose {{ruby_version}}"
       when:
         - ruby_installed.rc != 0
       async: 3600
       poll: 10
+
+    - name: check if current system ruby version is {{ ruby_version }}
+      shell: "/home/{{ deploy_user }}/.rbenv/bin/rbenv version | cut -d ' ' -f 1 | grep -Fx '{{ ruby_version }}'"
+      register: current_ruby_selected
+      changed_when: false
+      ignore_errors: yes
+      check_mode: no
 
     - name: rbenv set global ruby version and rehash
       command: "/home/{{ deploy_user }}/.rbenv/bin/rbenv global {{ruby_version}} && rbenv rehash"
@@ -275,6 +290,6 @@
         ansible_ssh_pipelining: true
 
     - name: Create postgresql user
-      postgresql_user: name={{ postgres_db_user }} password={{ db_password }}
+      postgresql_user: name={{ postgres_db_user }} password={{ db_password }} role_attr_flags="CREATEDB"
       become: true
       become_user: postgres

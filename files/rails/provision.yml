@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: true
+
+  vars_files:
+    - app-vars.yml
+
+  tasks:
+    - name: nginx
+      template:
+        src: nginx.conf.j2
+        dest: "/etc/nginx/conf.d/{{ app_name }}.conf"
+  
+  roles: 
+    - role: postgresql
+      tags: postgresql

@@ -1,8 +1,10 @@
 # Ansible Control Panel
 
-## Server Provision
+Tested with ansible-playbook 2.9.11
 
-This Ansible script is for Ubuntu 20.04 LTS server. This Ansible script will setup a server installed with the following.
+## 1) Server Provision
+
+This Ansible script is for a remote Ubuntu server. It will setup a server installed with the following.
 
 1. Ruby
 2. Nginx
@@ -15,15 +17,29 @@ This Ansible script is for Ubuntu 20.04 LTS server. This Ansible script will set
 ### How to run
 
 ```
-make cloud
+cp secrets.examples secrets
+```
+
+Edit `secrets` and `config/server` with your variables.
+
+Edit `hosts.ini` with your remote server information.
+
+Run the make commands.
+
+```
+make webserver
 make zsh
 ```
 
-## Sergey app provision
+## 2) Sergey app provision
 
-Sets up a sergey application
+This Ansible script sets up a Sergey application.
 
 ### How to run
+
+Edit `config/sergey` with your variables.
+
+Run the make command.
 
 ```
 make sergey

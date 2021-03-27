@@ -4,56 +4,56 @@
   connection: local 
 
   vars_files:
-    - vars/sergey
+    - config/sergey
 
   tasks:
     - name: Create root directory fo app.
       file:
-        path: "{{ app }}"
+        path: "{{ app_location }}"
         state: directory
 
     - name: Copy favicon ico.
       copy:
         src: sergey/favicon.ico
-        dest: "{{ app }}/favicon.ico"
+        dest: "{{ app_location }}/favicon.ico"
 
     - name: Create sergey src directory.
       file:
         path: "{{ item }}"
         state: directory
       with_items:
-        - '{{ app }}/src'
+        - '{{ app_location }}/src'
       
     - name: Copy headers.
       copy:
         src: sergey/headers
-        dest: "{{ app }}/headers"
+        dest: "{{ app_location }}/headers"
 
     - name: Ansible copy sergey files.
       copy:
         src: sergey/files
-        dest: "{{ app }}"
+        dest: "{{ app_location }}"
     
     - name: Ansible copy sergey imports.
       copy:
         src: sergey/_imports
-        dest: "{{ app }}"
+        dest: "{{ app_location }}"
 
     - name: Create package.json.
       template:
         src: sergey/package.json.j2
-        dest: "{{ app }}/package.json"
+        dest: "{{ app_location }}/package.json"
 
     - name: Copy index.html.
       copy:
         src: sergey/index.html
-        dest: "{{ app }}/index.html"
+        dest: "{{ app_location }}/index.html"
 
     - name: Install packages based on package.json.
       npm:
-        path: "{{ app }}"
+        path: "{{ app_location }}"
 
     - name: Copy sergey html file.
       template:
         src: sergey/first.html.j2
-        dest: "{{ app }}/_imports/sections/first.html"
+        dest: "{{ app_location }}/_imports/sections/first.html"

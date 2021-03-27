@@ -1,6 +1,9 @@
 zsh:
 	ansible-playbook -e @secrets zsh.yml
-cloud:
+webserver:
 	ansible-playbook -e @secrets server.yml
+cloud: webserver zsh
 sergey:
 	ansible-playbook -e @secrets sergey.yml
+rails:
+	ansible-playbook -e @secrets rails.yml

@@ -1,9 +1,9 @@
 ---
-- hosts: cloud
+- hosts: webserver
   become: true
 
   vars_files:
-    - vars/server
+    - config/server
 
   pre_tasks:
     - name: Update apt cache if needed.
@@ -19,6 +19,13 @@
     - name: chown to username you login and chmod as required
       file:
         path: /var/www/html
+        owner: "{{ deploy_user }}"
+        group: "{{ deploy_user }}"
+        mode: 0755
+
+    - name: chown to username you login and chmod as required
+      file:
+        path: /etc/nginx/conf.d
         owner: "{{ deploy_user }}"
         group: "{{ deploy_user }}"
         mode: 0755
@@ -53,3 +60,7 @@
       user:
         name: "{{ deploy_user }}"
         shell: /bin/zsh
+
+    - name: "update hostnames"
+      hostname:
+        name: "{{ hostname }}"
