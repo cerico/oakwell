@@ -25,9 +25,11 @@ SWAPFREE=$(cat /proc/meminfo | grep -m 1 -w 'SwapFree' | awk -F: '{print $2}')
 #Colours
 GREEN="\033[01;32m"
 CYAN="\033[01;36m"
+RED="\033[01;31m"
+WHITE="\033[01;37m"
 NC="\033[00m"
 echo  "
-$LOGO
+${WHITE}$LOGO${NC}
 ===============================================
  - Hostname............: $HOSTNAME
  - Uptime..............: $UPTIME_DAYS days, $UPTIME_HOURS hours, $UPTIME_MINUTES minutes
@@ -36,6 +38,5 @@ $LOGO
  - CPU usage...........: ${CYAN}$LOAD1, $LOAD5, $LOAD15 ${NC}(1, 5, 15 min)
  - Memory used.........: ${CYAN}$MEMORY1${NC} / ${GREEN}$MEMORY2 ${NC}
  - Swap in use.........: `free -m | tail -n 1 | awk '{print $3}'` MB
-===============================================
+==============================================="${NC}"
 "
-echo  "${NC}"

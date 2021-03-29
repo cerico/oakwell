@@ -15,7 +15,7 @@
         name: sshd
         state: restarted
 
-  tasks: 
+  tasks:
     - name: chown to username you login and chmod as required
       file:
         path: /var/www/html
@@ -54,6 +54,22 @@
       copy:
         src: server/motd
         dest: /etc/profile.d/motd.sh
+
+    - name: Copy pm2 motd
+      copy:
+        src: server/pm2
+        dest: /etc/profile.d/pm2.sh
+
+    - name: Copy passenger motd
+      copy:
+        src: server/passenger
+        dest: /etc/profile.d/passenger.sh
+
+    - name: Copy passenger formatter
+      copy:
+        src: server/passenger-formatter
+        dest: "/home/{{ deploy_user }}/passenger-formatter.sh"
+        mode: 0755
   
     - name: change user shell to zsh 
       become: yes
@@ -64,3 +80,47 @@
     - name: "update hostnames"
       hostname:
         name: "{{ hostname }}"
+
+    - name: Install PM2
+      npm:
+        name: pm2
+        global: yes
+ 
+    - name: make pm2 startup at system restart
+      command: pm2 startup systemd -u {{ deploy_user }} --hp /home/{{ deploy_user }}
+      become: true
+      become_user: root
+
+    - name: Install snapd
+      ansible.builtin.apt:
+        name: snapd
+        state: present
+
+    - name: Install snap core
+      community.general.snap:
+        name: core
+
+    - name: Remove Certbot from apt
+      ansible.builtin.apt:
+        name: certbot
+        state: absent
+
+    - name: install certbot ubuntu
+      apt: pkg=certbot state=latest
+      with_items:
+        - certbot
+
+    - name: change the path to letsencrypt
+      set_fact:
+        letsencrypt_path: "/usr/bin/letsencrypt"
+
+    - name: Copy certbot script
+      copy:
+        src: server/certbot
+        dest: "/home/{{ deploy_user }}/cert.sh"
+        mode: 0755
+      
+    - name: copy certbot cron
+      copy:
+        src: server/cron
+        dest: "/etc/cron.d/encrypt"

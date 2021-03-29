@@ -29,19 +29,21 @@
       - rails/ansible.cfg
       - rails/deploy.yml
       - rails/provision.yml
-      - rails/hosts.ini
 
     - name: vars
       template:
         src: rails/app-vars.yml.j2
         dest: "{{ app_location }}/.deploy/app-vars.yml"
 
-    - name: Copy makefile
-      copy:
-        src: "{{ item }}"
-        dest: "{{ app_location }}"
-      with_items:
-      - rails/Makefile
+    - name: hosts
+      template:
+        src: rails/hosts.ini.j2
+        dest: "{{ app_location }}/.deploy/hosts.ini"
+
+    - name: Makefile
+      template:
+        src: rails/Makefile.j2
+        dest: "{{ app_location }}/Makefile"
 
     - name: Ansible master key
       shell: "echo master_key: $(cat {{ app_location }}/config/master.key) >> {{ app_location }}/.deploy/secrets"

@@ -7,6 +7,14 @@
     - config/sergey
 
   tasks:
+    - name: check for sergey app
+      stat: path={{ app_location }}
+      register: sergey
+
+    - name: exit if sergey app already exists with this name
+      fail: msg="This sergey app already exists - edit sergey/vars with new info"
+      when: sergey.stat.exists
+
     - name: Create root directory fo app.
       file:
         path: "{{ app_location }}"

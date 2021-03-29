@@ -61,6 +61,11 @@
       tags: puma
       become: true
       become_user: root
+  
+    - role: letsencrypt
+      tags: letsencrypt
+      become: true
+      become_user: root
       
     - role: nginx
       tags: nginx

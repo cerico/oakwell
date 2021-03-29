@@ -10,3 +10,5 @@ source $HOME/.zshenv
 
 eval "$(rbenv init - zsh)"
 sh /etc/profile.d/motd.sh
+sh /etc/profile.d/pm2.sh
+sh /etc/profile.d/passenger.sh

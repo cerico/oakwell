@@ -1,14 +1,25 @@
 server {
   listen 80;
   listen [::]:80;
+  server_name {{ url }};
+  return 301 https://$host$request_uri;
+}
+
+server {
+  listen [::]:443 ssl;
+  listen 443 ssl;
 
   server_name {{ url }};
   root {{ app_root_path }}/current/public;
 
   passenger_enabled on;
-  passenger_app_env production;
-  passenger_friendly_error_pages on;
   passenger_ruby {{ deploy_user_path}}/.rbenv/shims/ruby;
+
+  ssl_certificate /etc/letsencrypt/live/{{ url }}/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/{{ url }}/privkey.pem;
+
+  # first try to serve the erb version.
+  index index.html;
 
   location /cable {
     passenger_app_group_name {{ app_name}}_websocket;

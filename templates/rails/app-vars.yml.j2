@@ -12,10 +12,10 @@ app_git_repo:       "git@github.com:cerico/{{'{{  app_name }}'}}.git"
 app_git_branch:     "main"
 
 # Url
-url: "{{'{{  app_name }}' }}.larchtre.es"
+url: {{ url }}
 
 # Rails app
-app_root_path:      "/var/www/html/{{'{{  app_name }}' }}"
+app_root_path:      "/var/www/html/{{'{{  url }}' }}"
 app_current_path:   "{{'{{ app_root_path }}' }}/current"
 app_releases_path:  "{{'{{ app_root_path }}' }}/releases"
 app_shared_path:    "{{'{{ app_root_path }}' }}/shared"
