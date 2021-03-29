@@ -8,9 +8,10 @@ Tested on a Ubuntu 20.04 target vps. It will setup a server installed with the f
 4. Rails
 5. Postgres
 6. Nginx
-7. zsh
-8. oh-my-zsh
-9. tree
+7. pm2
+8. zsh
+9. oh-my-zsh
+10. tree
 
 ### How to run
 
