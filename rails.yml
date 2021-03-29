@@ -30,6 +30,13 @@
       - rails/deploy.yml
       - rails/provision.yml
 
+    - name: Copy deploy readme
+      copy:
+        src: "{{ item }}"
+        dest: "{{ app_location }}/README.md"
+      with_items:
+      - rails/readmes/deploy.md
+
     - name: vars
       template:
         src: rails/app-vars.yml.j2

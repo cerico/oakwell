@@ -4,47 +4,19 @@ Tested with ansible-playbook 2.9.11
 
 ## 1) Server Provision
 
-This Ansible script is for a remote Ubuntu server. It will setup a server installed with the following.
+Provisions a webserver on an Ubuntu 20.04 box
 
-1. Ruby
-2. Nginx
-3. Passenger
-4. Rails
-5. Postgres
-6. zsh
-7. oh-my-zsh
+[Instructions](readmes/server.md)
 
-### How to run
+## 2) Sergey app creation
 
-```
-cp secrets.examples secrets
-```
+Creates a Sergey static site locally
 
-Edit `secrets` and `config/server` with your variables.
+[Instructions](readmes/sergey.md)
 
-Edit `hosts.ini` with your remote server information.
+## 3) Ruby on Rails app creation
 
-Run the make commands.
+Creates a Ruby on Rails site
+Creates an Ansible Deployment script within it
 
-```
-make webserver
-make zsh
-```
-
-## 2) Sergey app provision
-
-This Ansible script sets up a Sergey application.
-
-### How to run
-
-Edit `config/sergey` with your variables.
-
-Run the make command.
-
-```
-make sergey
-```
-
-## TODO
-
-Rails/React application
+[Instructions](readmes/rails.md)
