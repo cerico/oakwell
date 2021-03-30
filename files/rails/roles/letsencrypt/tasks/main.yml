@@ -7,6 +7,10 @@
   stat: path=/etc/letsencrypt/renewal/{{ url }}.conf
   register: certu
 
+- name: restart nginx
+  service: name=nginx state=restarted
+  when: cert.stat.exists or certu.stat.exists
+
 - name: exit if rails app already exists with this name
   fail: msg="This cert already exists dont worry about it"
   when: cert.stat.exists
