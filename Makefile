@@ -11,7 +11,3 @@ sergey:
 
 rails:
 	ansible-playbook -e @secrets rails.yml
-
-input:
-	ansible-playbook -e @secrets input.yml
-  

@@ -3,19 +3,19 @@ app_name:           {{ app_name }}
 deploy_user:        deploy
 
 deploy_group:       "{{'{{ deploy_user }}'}}"
-deploy_user_path:   "/home/{{'{{  deploy_user }}'}}"
+deploy_user_path:   "/home/{{'{{ deploy_user }}'}}"
 
 vault_rails_master_key: "{{'{{ master_key }}'}}"
 vault_postgresql_db_password: "{{'{{ db_password }}'}}"
 # App Git repo
-app_git_repo:       "git@github.com:cerico/{{'{{  app_name }}'}}.git"
+app_git_repo:       "git@github.com:cerico/{{'{{ app_name }}'}}.git"
 app_git_branch:     "main"
 
 # Url
 url: {{ url }}
 
 # Rails app
-app_root_path:      "/var/www/html/{{'{{  url }}' }}"
+app_root_path:      "/var/www/html/{{'{{ url }}' }}"
 app_current_path:   "{{'{{ app_root_path }}' }}/current"
 app_releases_path:  "{{'{{ app_root_path }}' }}/releases"
 app_shared_path:    "{{'{{ app_root_path }}' }}/shared"
@@ -96,7 +96,7 @@ rbenv_bundle: "{{'{{ rbenv_root_path }}'}}/shims/bundle"
 nodejs_version: "15.x"
 
 # Postgresql
-postgres_name: "{{'{{ app_name | replace(\'-\',\'_\') '}}"
+postgres_name: "{{'{{ app_name | replace(\'-\',\'_\') }}'}}"
 postgresql_version: "13"
 postgresql_db_user: "{{'{{ postgres_name }}'}}"
 postgresql_db_password: "{{'{{ vault_postgresql_db_password }}'}}" # from vault

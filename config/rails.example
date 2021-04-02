@@ -1,3 +1,2 @@
-app_name: 'cali'
-app_location: '~/cali'
-url: 'cali.larchtre.es'
+app_directory: '~'
+remote_domain: 'larchtre.es'
