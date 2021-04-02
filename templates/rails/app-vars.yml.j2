@@ -96,10 +96,11 @@ rbenv_bundle: "{{'{{ rbenv_root_path }}'}}/shims/bundle"
 nodejs_version: "15.x"
 
 # Postgresql
+postgres_name: "{{'{{ app_name | replace(\'-\',\'_\') '}}"
 postgresql_version: "13"
-postgresql_db_user: "{{'{{ app_name }}'}}"
+postgresql_db_user: "{{'{{ postgres_name }}'}}"
 postgresql_db_password: "{{'{{ vault_postgresql_db_password }}'}}" # from vault
-postgresql_db_name: "{{'{{ app_name }}'}}_production"
+postgresql_db_name: "{{'{{ postgres_name }}'}}_production"
 postgresql_listen:
   - "localhost"
   - "{{'{{ ansible_default_ipv4.address }}'}}" # only if db is on a separate server

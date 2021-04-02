@@ -3,8 +3,17 @@
   hosts: localhost
   connection: local 
 
+  vars_prompt:
+    - name: app_name
+      prompt: What is your app_name?
+      private: no
+
   vars_files:
     - config/rails
+
+  vars:
+    app_location: "{{ app_directory }}/{{ app_name }}"
+    url: "{{ app_name }}.{{ remote_domain }}"
 
   tasks:
     - name: check for rails app
@@ -60,3 +69,8 @@
 
     - name: Ansible gitignore
       shell: "echo .deploy/secrets >> {{ app_location }}/.gitignore"
+
+    - name: print app location.
+      copy:
+        content: "{{ app_location }}"
+        dest: location

@@ -3,8 +3,16 @@
   hosts: localhost
   connection: local 
 
+  vars_prompt:
+    - name: app_name
+      prompt: What is your app_name?
+      private: no
+
   vars_files:
     - config/sergey
+
+  vars:
+    app_location: "{{ app_directory }}/{{ app_name }}"
 
   tasks:
     - name: check for sergey app
@@ -25,18 +33,26 @@
         src: sergey/favicon.ico
         dest: "{{ app_location }}/favicon.ico"
 
-    - name: Create sergey src directory.
-      file:
-        path: "{{ item }}"
-        state: directory
-      with_items:
-        - '{{ app_location }}/src'
-      
+    - name: Copy gitignore.
+      copy:
+        src: sergey/gitignore
+        dest: "{{ app_location }}/.gitignore"
+
+    - name: Copy readme.
+      copy:
+        src: sergey/README.md
+        dest: "{{ app_location }}/README.md"
+
     - name: Copy headers.
       copy:
         src: sergey/headers
         dest: "{{ app_location }}/headers"
 
+    - name: Ansible copy sergey scss files.
+      copy:
+        src: sergey/src
+        dest: "{{ app_location }}"
+    
     - name: Ansible copy sergey files.
       copy:
         src: sergey/files
