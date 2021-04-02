@@ -12,8 +12,8 @@
     - config/rails
 
   vars:
-    app_location: "{{ app_directory }}/{{ app_name }}"
-    url: "{{ app_name }}.{{ remote_domain }}"
+    app_location: "{{ app_directory | default('~') }}/{{ app_name }}"
+    url: "{{ app_name }}.{{ remote_domain | default('example.com') }}"
 
   tasks:
     - name: check for rails app

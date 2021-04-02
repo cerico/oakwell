@@ -6,6 +6,10 @@
     - app-vars.yml
 
   tasks:
+
+    - name: check host exists
+      ansible.builtin.ping:
+
     - name: nginx
       template:
         src: nginx.conf.j2
