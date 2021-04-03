@@ -2,7 +2,7 @@
 app_directory: '~'
 remote_domain: 'larchtre.es'
 
-# For use with webserver and zsh playbooks
+# For use with webserver playbook
 ruby_version: '2.7.1'
 deploy_user: '{{ deploy_user }}'
 deploy_user_password: '{{ user_password }}'
