@@ -25,8 +25,19 @@ Edit `secrets` and `config` with your variables.
 
 Edit `hosts.ini` with your remote server information.
 
-Run the make commands.
+Run the make command.
 
 ```
 make webserver
 ```
+
+### Troubleshooting
+
+If you run into issues with ssh access, edit `key.yml` with your information and run 
+
+```
+make key
+```
+
+Then run `make webserver` again
+
