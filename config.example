@@ -1,6 +1,6 @@
 # For use with rails and sergey playbooks
 app_directory: '~'
-remote_domain: 'larchtre.es'
+remote_domain: 'example.com' # change to either TopLevelDomain (for example de, com, or fi) or root of your subdomains (for example io37.ch)
 
 # For use with webserver playbook
 ruby_version: '2.7.1'
