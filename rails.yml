@@ -9,13 +9,17 @@
       private: no
 
   vars_files:
-    - config/rails
+    - config
 
   vars:
     app_location: "{{ app_directory | default('~') }}/{{ app_name }}"
     url: "{{ app_name }}.{{ remote_domain | default('example.com') }}"
 
   tasks:
+    - name: get email                                 
+      command: git config --get user.email
+      register: email
+
     - name: check for rails app
       stat: path={{ app_location }}
       register: rails

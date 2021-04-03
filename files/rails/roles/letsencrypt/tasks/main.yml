@@ -25,7 +25,7 @@
 - name: encrypt
   become: yes
   command: >
-    /usr/bin/letsencrypt certonly --standalone -d {{ url }}
+    /usr/bin/letsencrypt certonly --standalone -d {{ url }} -n --email {{ email }} --agree-tos
 
 - name: start nginx
   service: name=nginx state=started

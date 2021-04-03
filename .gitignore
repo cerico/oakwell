@@ -1,6 +1,5 @@
 secrets
 .deploy/secrets
-config/rails
-config/sergey
-config/server
+config
 location
+.vscode

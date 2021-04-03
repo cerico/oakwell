@@ -1,0 +1,13 @@
+# For use with rails and sergey playbooks
+app_directory: '~'
+remote_domain: 'larchtre.es'
+
+# For use with webserver and zsh playbooks
+ruby_version: '2.7.1'
+deploy_user: '{{ deploy_user }}'
+deploy_user_password: '{{ user_password }}'
+deploy_user_public_key_local_path: '~/.ssh/id_rsa.pub'
+postgresql_version: '13'
+postgresql_locales:
+  - 'en_US.UTF-8'
+  - 'en_GB.UTF-8'

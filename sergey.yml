@@ -9,7 +9,7 @@
       private: no
 
   vars_files:
-    - config/sergey
+    - config
 
   vars:
     app_location: "{{ app_directory }}/{{ app_name }}"
