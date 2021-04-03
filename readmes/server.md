@@ -12,15 +12,16 @@ Tested on a Ubuntu 20.04 target vps. It will setup a server installed with the f
 8. zsh
 9. oh-my-zsh
 10. tree
+11. Letsencrypt
 
 ### How to run
 
 ```
 cp secrets.examples secrets
-cp config/server.example config/server
+cp config.example config
 ```
 
-Edit `secrets` and `config/server` with your variables.
+Edit `secrets` and `config` with your variables.
 
 Edit `hosts.ini` with your remote server information.
 
@@ -28,5 +29,4 @@ Run the make commands.
 
 ```
 make webserver
-make zsh
 ```
