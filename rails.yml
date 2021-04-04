@@ -48,6 +48,11 @@
         src: rails/app-vars.yml.j2
         dest: "{{ app_location }}/.deploy/app-vars.yml"
 
+    - name: success file
+      copy:
+        src: rails/success.html
+        dest: "{{ app_location }}/public/success.html"
+
     - name: hosts
       template:
         src: rails/hosts.ini.j2
