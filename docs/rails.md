@@ -1,7 +1,10 @@
 
-## Rails app provision
+## Ruby on Rails
 
-This Ansible script sets up a Rails application.
+This Ansible playbook sets up
+
+- Ruby on Rails application.
+- Pre-configred Ansible playbook for deployment.
 
 ### Pre-requisites
 
