@@ -13,7 +13,7 @@ ansible-galaxy install ansistrano.deploy
 
 ### How to run
 
-Edit `config/rails` with
+Edit `config` with
 
 1) Your local app_location (for example `~`, or `/var/www/html`) 
 2) Your top level domain if you have one. If you are publishing to something like `denver.ch` this will just be `ch`. If you are publishing to a subdomain with something like `denver.io37.ch` then this will be `io37.ch`. If you're going to be creating multiple applications at different subdomains all under the same root you can rerun the script without editing this file again.
