@@ -3,3 +3,6 @@ setup:
 	ansible-playbook -e @.deploy/secrets -i .deploy/hosts.ini .deploy/setup.yml
 deploy:
 	ansible-playbook -e @.deploy/secrets -i .deploy/hosts.ini .deploy/deploy.yml
+repo:
+	gh repo create {{ app_name }} --private -y
+	git push origin main
