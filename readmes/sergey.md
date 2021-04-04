@@ -10,8 +10,8 @@ This Ansible script sets up a local Sergey static site.
 Edit `config/sergey` with your variables.
 
 ```
-cp config/sergey.example config/sergey
-vi config/sergey
+cp config.example config
+vi config
 ```
 
 Run the make command.
