@@ -41,14 +41,7 @@
       - rails/templates
       - rails/ansible.cfg
       - rails/deploy.yml
-      - rails/provision.yml
-
-    - name: Copy deploy readme
-      copy:
-        src: "{{ item }}"
-        dest: "{{ app_location }}/README.md"
-      with_items:
-      - rails/readmes/deploy.md
+      - rails/setup.yml
 
     - name: vars
       template:
@@ -73,6 +66,42 @@
 
     - name: Ansible gitignore
       shell: "echo .deploy/secrets >> {{ app_location }}/.gitignore"
+
+    - name: rails into readme
+      command: ./bin/rails -v
+      args:
+        chdir: "{{ app_location }}"
+      register: rails_version
+
+    - name: Running pending migrations
+      command: ./bin/rake db:create
+      args:
+        chdir: "{{ app_location }}"
+
+    - name: Running pending migrations
+      command: ./bin/rake db:migrate
+      args:
+        chdir: "{{ app_location }}"
+
+    - name: readme
+      template:
+        src: rails/readme.md.j2
+        dest: "{{ app_location }}/README.md"
+
+    - name: git add
+      command: git add . 
+      args:
+        chdir: "{{ app_location }}"
+
+    - name: git commit 
+      command: git commit -m first
+      args:
+        chdir: "{{ app_location }}"
+
+    - name: git main
+      command: git branch -m main
+      args:
+        chdir: "{{ app_location }}"
 
     - name: print app location.
       copy:

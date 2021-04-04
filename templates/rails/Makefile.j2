@@ -1,5 +1,5 @@
-provision:
+setup:
 	ssh-keyscan {{ url }} >> ~/.ssh/known_hosts
-	ansible-playbook -e @.deploy/secrets -i .deploy/hosts.ini .deploy/provision.yml
+	ansible-playbook -e @.deploy/secrets -i .deploy/hosts.ini .deploy/setup.yml
 deploy:
 	ansible-playbook -e @.deploy/secrets -i .deploy/hosts.ini .deploy/deploy.yml
