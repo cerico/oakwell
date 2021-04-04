@@ -4,7 +4,19 @@ Tested with ansible-playbook 2.9.11
 
 ## 1) Server Provision
 
-Provisions a webserver on an Ubuntu 20.04 box
+Provisions a webserver on an Ubuntu 20.04 or 20.10 box with
+
+- Ruby
+- Rails
+- rbenv
+- Passenger
+- Postgres
+- Nginx
+- pm2
+- zsh
+- oh-my-zsh
+- tree
+- Letsencrypt
 
 [Instructions](docs/server.md)
 
