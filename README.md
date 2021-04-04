@@ -28,7 +28,7 @@ Creates a Sergey static site locally
 
 ## 3) Ruby on Rails app creation
 
-- Creates a Ruby on Rails site
+- Creates a Ruby on Rails application
 - Creates an Ansible Deployment playbook inside it
 
 [Instructions](docs/rails.md)
