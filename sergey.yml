@@ -46,7 +46,7 @@
     - name: Copy headers.
       copy:
         src: sergey/headers
-        dest: "{{ app_location }}/headers"
+        dest: "{{ app_location }}_/headers"
 
     - name: Ansible copy sergey scss files.
       copy:
