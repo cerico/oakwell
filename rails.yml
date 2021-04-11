@@ -53,6 +53,11 @@
         src: rails/success.html
         dest: "{{ app_location }}/public/success.html"
 
+    - name: favicon
+      copy:
+        src: rails/favicon.ico
+        dest: "{{ app_location }}/public/favicon.ico"
+
     - name: hosts
       template:
         src: rails/hosts.ini.j2
