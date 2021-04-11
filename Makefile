@@ -2,10 +2,10 @@ webserver:
 	ansible-playbook -e @secrets server.yml
 
 sergey:
-	ansible-playbook -e @secrets sergey.yml
+	ansible-playbook sergey.yml
 
 rails:
-	ansible-playbook -e @secrets rails.yml
+	ansible-playbook rails.yml
 
 key:
 	ansible-playbook -e @secrets key.yml
