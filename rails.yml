@@ -72,6 +72,11 @@
     - name: Ansible gitignore
       shell: "echo .deploy/secrets >> {{ app_location }}/.gitignore"
 
+    - name: bundle install
+      command: bundle install
+      args:
+        chdir: "{{ app_location }}"
+
     - name: rails into readme
       command: ./bin/rails -v
       args:
