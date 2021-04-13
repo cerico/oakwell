@@ -74,8 +74,9 @@
         dest: "{{ app_location }}/index.html"
 
     - name: Install packages based on package.json.
-      npm:
-        path: "{{ app_location }}"
+      command: npm install
+      args:
+        chdir: "{{ app_location }}"
 
     - name: Copy sergey html file.
       template:

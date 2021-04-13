@@ -9,10 +9,10 @@
     "sergey": "0.0.13"
   },
   "scripts": {
-    "dev": "sergey --watch --port=8200 --exclude=.vscode,*.conf,src",
-    "build": "sergey",
+    "dev": "npm run sass && sergey --watch --port=8200 --exclude=.vscode,*.conf,src",
+    "build": "npm run sass && npm run mqpacker && sergey",
     "netlify": "netlify deploy --prod -d public",
-    "sass": "sass --watch --no-source-map src/style.scss files/style.css",
+    "sass": "sass --no-source-map src/style.scss files/style.css",
     "mqpacker": "mqpacker -s ./files/style.css ./files/style.css",
     "build:css": "npm run sass && npm run mqpacker",
     "start": "sergey",
