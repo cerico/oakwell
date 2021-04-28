@@ -38,6 +38,11 @@
     src: server/motd
     dest: /etc/profile.d/motd.sh
 
+- name: Copy cert.sh
+  copy:
+    src: server/certbot
+    dest: ~{{ deploy_user }}/cert.sh
+
 - name: Copy pm2 motd
   copy:
     src: server/pm2
@@ -83,27 +88,10 @@
   community.general.snap:
     name: core
 
-- name: Remove Certbot from apt
-  ansible.builtin.apt:
+- name: Install certbot snap with option --classic
+  community.general.snap:
     name: certbot
-    state: absent
+    classic: yes
 
-- name: install certbot ubuntu
-  apt: pkg=certbot state=latest
-  with_items:
-    - certbot
 
-- name: change the path to letsencrypt
-  set_fact:
-    letsencrypt_path: "/usr/bin/letsencrypt"
 
-- name: Copy certbot script
-  copy:
-    src: server/certbot
-    dest: "/home/{{ deploy_user }}/cert.sh"
-    mode: 0755
-      
-- name: copy certbot cron
-  copy:
-    src: server/cron
-    dest: "/etc/cron.d/encrypt"

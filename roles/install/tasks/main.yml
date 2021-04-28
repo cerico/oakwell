@@ -98,3 +98,9 @@
       - yarn
       - zsh
       - tree
+      - python3-certbot-nginx
+
+- name: Install certbot snap with option --classic
+  community.general.snap:
+    name: certbot
+    classic: yes
