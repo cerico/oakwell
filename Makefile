@@ -9,3 +9,6 @@ rails:
 
 key:
 	ansible-playbook -e @secrets key.yml
+
+macbook:
+	ansible-playbook -e @secrets macbook.yml

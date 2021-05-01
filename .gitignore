@@ -3,3 +3,4 @@ secrets
 config
 location
 .vscode
+ansible.log
