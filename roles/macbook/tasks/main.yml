@@ -85,3 +85,9 @@
   postgresql_user:
     name: "{{ macbook_user }}"
     role_attr_flags: CREATEDB
+
+- name: add community.general                             
+  command: ansible-galaxy collection install community.general
+
+- name: add ansistrano                              
+  command:  ansible-galaxy install ansistrano.deploy
