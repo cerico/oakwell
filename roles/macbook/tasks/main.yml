@@ -91,3 +91,18 @@
 
 - name: add ansistrano                              
   command:  ansible-galaxy install ansistrano.deploy
+
+- name: Copy wallpapers
+  become: true
+  become_user: root
+  copy:
+    src: "{{ item }}"
+    dest: /Library/Desktop Pictures/
+  with_items:
+  - macbook/wallpapers/bluetiled.png
+  - macbook/wallpapers/greentiled.png
+  - macbook/wallpapers/oaktiled.png
+
+- name: 'set wallpaper'
+  shell: osascript -e 'set desktopImage to POSIX file "'/Library/Desktop\ Pictures/bluetiled.png'"' -e 'tell application "Finder"' -e 'set desktop picture to desktopImage' -e 'end tell'
+  

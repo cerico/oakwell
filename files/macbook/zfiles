@@ -1,4 +1,5 @@
 export MARKPATH=$HOME/.marks
+alias sedi='sed -i "" -e'
 
 sourcez () {
   source ~/.zshrc
@@ -40,10 +41,6 @@ compctl -K _completemarks unmark
 mcd () {
   mkdir "$1"
   cd "$1"
-}
-
-sedi () {
-  sed -i "" -e'
 }
 
 start () {
@@ -102,4 +99,30 @@ railshist () {
 
 cpr () { 
     echo -e "\033]50;SetProfile=$1\a" 
+}
+
+hist () {
+  history | grep -i $1
+}
+
+wallpaper () {
+  osascript -e 'set desktopImage to POSIX file "'/Library/Desktop\ Pictures/$1'"
+  tell application "Finder"
+    set desktop picture to desktopImage
+  end tell'
+}
+
+green () {
+  background="greentiled.png"
+  wallpaper $background
+}
+
+blue () {
+  background="bluetiled.png"
+  wallpaper $background
+}
+
+oak () {
+  background="oaktiled.png"
+  wallpaper $background
 }
