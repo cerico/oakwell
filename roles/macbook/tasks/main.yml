@@ -81,7 +81,7 @@
 - name: 'install rails'
   command: "~{{ macbook_user }}/.rbenv/shims/gem install rails"
 
-- name: Create users
+- name: Create postgres user
   postgresql_user:
     name: "{{ macbook_user }}"
     role_attr_flags: CREATEDB
@@ -105,4 +105,3 @@
 
 - name: 'set wallpaper'
   shell: osascript -e 'set desktopImage to POSIX file "'/Library/Desktop\ Pictures/bluetiled.png'"' -e 'tell application "Finder"' -e 'set desktop picture to desktopImage' -e 'end tell'
-  

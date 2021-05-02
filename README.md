@@ -36,3 +36,9 @@ Creates a Sergey static site locally
 - Creates an Ansible Deployment playbook inside it
 
 [Instructions](docs/rails.md)
+
+## 4) Macbook setup
+
+- Sets up Macbook
+
+[Instructions](docs/macbook.md)
